@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sample Web App - Temperature Evaluator</title>
+    <meta charset="utf-8"/>
+  </head>
+  <body>
+    <h1>Temperature Evaluator</h1>
+    <p>This simple Web application allows you to enter the current temperature, in degrees Fahrenheit, and will then assesses whether it is hot, cold, or some other appropriate adjective.</p>
+    <form onsubmit="return false;">
+      <label>
+        Temp (F&deg;)
+        <input type="number" id="tempInput" value="0" />
+      </label>
+      <button onclick="assessTemperature();">Evaluate</button>
+      <output id="result"></output>
+    </form>
+    <script>
+      function assessTemperature() {
+        var inputElem = document.querySelector('#tempInput');
+        var outputElem = document.querySelector('#result');
+        var temp = inputElem.value;
+        var feel;
+
+        if (temp > 90)
+          feel = 'hot';
+        else if (temp > 70)
+          feel = 'warm';
+        else if (temp > 50)
+          feel = 'nice';
+        else if (temp > 30)
+          feel = 'cool';
+        else
+          feel = 'cold';
+
+        outputElem.innerHTML = 'It is ' + feel + ' out there today.'
+      }
+    </script>
+  </body>
+</html>
+
