@@ -10,35 +10,37 @@
 		<form onsubmit="return false;">
 			<label>
 				Humidity (Percentage: 0 ~ 100):
-				<input type="number" max="100" min="0" id="inputHumidity" value="0" />
+				<input type="number" max="100" min="0" id="inputHumidity" value="0" /><br>
 			</label>
 			<label>
 				Temperture (Degree In Fahrenheit):
-				<input type="number" id="inputTemperature" value="0" />
+				<input type="number" id="inputTemperature" value="0" /><br>
 			</label>
-			<button onclick="calculateHeatIndex();">Calculate</button>
+			<button onclick="calculateHeatIndex();">Calculate</button><br>
 			<output id="result"> </output>
 		</form>
 		<script>
 			function calculateHeatIndex() {
-				var inputTemperature = document.getElementById("#inputTemperature");
-				var inputHumidity = document.getElementById("#inputHumidity");
-				var outputResult = document.querySelector('#result');
+				var inputTemperature = document.querySelector("#inputTemperature");
+				var inputHumidity = document.querySelector("#inputHumidity");
+				var outputElem = document.querySelector('#result');
 				var temperture = inputTemperature.value;
 				var humidity = inputHumidity.value;
 				var dangerLevel;
 				var heatIndex = -42.379 + 2.04901523 * temperture + 10.14333127 * humidity - 0.22475541 * temperture * humidity - 0.00683783 * 
 								Math.pow(temperture, 2) - 0.05481717 * Math.pow(humidity, 2) + 0.00122874 * Math.pow(temperture, 2) * humidity + 
 								0.00085282 * temperture * Math.pow(humidity, 2) - 0.00000199 * Math.pow(temperture, 2) * Math.pow(humidity, 2);
-				if (heatIndex >= 80 && heatIndex <= 90)
-						dangerLevel = "Caution";
-				if (heatIndex >= 91 && heatIndex <= 103)
-						dangerLevel = "Extrem Caution";
-				if (heatIndex >= 104 && heatIndex <= 124)
-						dangerLevel = "Danger";
-				if (heatIndex >= 124)
-						dangerLevel = "Extrem Danger";
-				outputResult.innerHTML = "The heat index is " + heatIndex + ". It is " + dangerLevel + "."
+				if (heatIndex < 80) 
+					dangerLevel = "Below Caution"
+				else if (heatIndex >= 80 && heatIndex <= 90)
+					dangerLevel = "Caution";
+				else if (heatIndex >= 91 && heatIndex <= 103)
+					dangerLevel = "Extrem Caution";
+				else if (heatIndex >= 104 && heatIndex <= 124)
+					dangerLevel = "Danger";
+				else
+					dangerLevel = "Extrem Danger";
+				outputElem.innerHTML = "The heat index is " + heatIndex + ". It is " + dangerLevel + "."
 			}
 		</script>
 	</body>
