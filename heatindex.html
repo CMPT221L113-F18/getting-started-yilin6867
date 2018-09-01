@@ -1,0 +1,41 @@
+<html lang='en'>
+	<head>
+		<title>Heat Index Calculator </title>
+		<meta charset='utf-8'/>
+	</head>
+	<body>
+		<h1> Heat Index Calculator </h1>
+		<p> This is a simple web page that accept temperture in Fahrenheit andrelative humidity as percentage between 0 to 100 and compute the heat index. </p>
+		<form onsubmit='return false;'>
+			<label>
+				temperture (F$deg;)
+				<input type='number' id='inputTemperature' value='0' />
+				humidity (%$percentage;)
+				<input type='number' min='0' max='100' id='inputHumidity' value='0' />
+			</label>
+			<button onclick='calculateHeatIndex();'>Evaluate</button>
+			<output id='result'></output>
+		</form>
+		<script>
+			function calculateHeatIndex() {
+				var inputTemperature = document.getElementById('#inputTemperature');
+				var inputHumidity = document.getElementById('#inputHumidity');
+				var temperture = inputTemperature.value;
+				var humidity = inputHumidity.value;
+				var dangerLevel;
+				var heatIndex = -42.379 + 2.04901523 * temperture + 10.14333127 * humidity - 0.22475541 * temperture * humidity - 0.00683783 * 
+								Math.pow(temperture, 2) - 0.05481717 * Math.pow(humidity, 2) + 0.00122874 * Math.pow(temperture, 2) * humidity + 
+								0.00085282 * temperture * Math.pow(humidity, 2) - 0.00000199 * Math.pow(temperture, 2) * Math.pow(humidity, 2);
+				if (heatIndex >= 80 && heatIndex <= 90)
+						dangerLevel = 'Caution';
+				if (heatIndex >= 91 && heatIndex <= 103)
+						dangerLevel = 'Extrem Caution';
+				if (heatIndex >= 104 && heatIndex <= 124)
+						dangerLevel = 'Danger';
+				if (heatIndex >= 124)
+						dangerLevel = 'Extrem Danger';
+				outputElem.innerHTML = "The heat index is " + heatIndex + ". It is " + dangerLevel + "."
+		</script>
+	</body>
+</html>
+			
