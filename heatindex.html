@@ -6,15 +6,15 @@
 	</head>
 	<body>
 		<h1> Heat Index Calculator </h1>
-		<p> This is a simple web page that accept temperture in Fahrenheit andrelative humidity as percentage between 0 to 100 and compute the heat index. </p>
+		<p> This is a simple web page that accept temperature in Fahrenheit andrelative humidity as percentage between 0 to 100 and compute the heat index. </p>
 		<form onsubmit="return false;">
+			<label>
+				Temperature (Degree In Fahrenheit):
+				<input type="number" id="inputTemperature" value="0" /><br>
+			</label>
 			<label>
 				Humidity (Percentage: 0 ~ 100):
 				<input type="number" max="100" min="0" id="inputHumidity" value="0" /><br>
-			</label>
-			<label>
-				Temperture (Degree In Fahrenheit):
-				<input type="number" id="inputTemperature" value="0" /><br>
 			</label>
 			<button onclick="calculateHeatIndex();">Calculate</button><br>
 			<output id="result"> </output>
@@ -24,12 +24,13 @@
 				var inputTemperature = document.querySelector("#inputTemperature");
 				var inputHumidity = document.querySelector("#inputHumidity");
 				var outputElem = document.querySelector('#result');
-				var temperture = inputTemperature.value;
+				var temperature = inputTemperature.value;
 				var humidity = inputHumidity.value;
 				var dangerLevel;
-				var heatIndex = -42.379 + 2.04901523 * temperture + 10.14333127 * humidity - 0.22475541 * temperture * humidity - 0.00683783 * 
-								Math.pow(temperture, 2) - 0.05481717 * Math.pow(humidity, 2) + 0.00122874 * Math.pow(temperture, 2) * humidity + 
-								0.00085282 * temperture * Math.pow(humidity, 2) - 0.00000199 * Math.pow(temperture, 2) * Math.pow(humidity, 2);
+				var heatIndexInDecimal = -42.379 + 2.04901523 * temperature + 10.14333127 * humidity - 0.22475541 * temperature * humidity - 0.00683783 * 
+								Math.pow(temperature, 2) - 0.05481717 * Math.pow(humidity, 2) + 0.00122874 * Math.pow(temperature, 2) * humidity + 
+								0.00085282 * temperature * Math.pow(humidity, 2) - 0.00000199 * Math.pow(temperature, 2) * Math.pow(humidity, 2);
+				var heatIndex = Math.round(heatIndexInDecimal * 100) / 100
 				if (heatIndex < 80) 
 					dangerLevel = "Below Caution"
 				else if (heatIndex >= 80 && heatIndex <= 90)
@@ -40,7 +41,7 @@
 					dangerLevel = "Danger";
 				else
 					dangerLevel = "Extrem Danger";
-				outputElem.innerHTML = "The heat index is " + heatIndex + ". It is " + dangerLevel + "."
+				outputElem.innerHTML = "The heat index is " + heatIndex + "°F. It is " + dangerLevel + "."
 			}
 		</script>
 	</body>
